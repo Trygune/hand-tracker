@@ -1,7 +1,8 @@
 {
-  "name": "hand-tracker",
+  "name": "hand-tracker-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Browser-based hand tracking and gesture control interface for Hand Tracker",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +12,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@hand-tracker/core": "file:../core",
+    "@hand-tracker/core": "^0.1.0",
     "@mediapipe/tasks-vision": "^1.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "clsx": "^2.1.1",

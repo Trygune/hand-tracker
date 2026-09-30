@@ -14,8 +14,8 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@hand-tracker/core": "file:../core",
-    "@hand-tracker/driver": "file:../driver",
+    "@hand-tracker/core": "^0.1.0",
+    "@hand-tracker/driver": "^0.1.0",
     "robotjs": "^0.9.1"
   }
 }

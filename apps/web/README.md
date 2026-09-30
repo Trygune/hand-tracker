@@ -1,75 +1,171 @@
-# React + TypeScript + Vite
+# Hand Tracker Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based hand tracking and gesture control interface built with React, Vite, MediaPipe, and `@hand-tracker/core`.
 
-Currently, two official plugins are available:
+The web application uses your webcam to detect hand landmarks, recognize gestures, and translate them into browser interactions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo
 
-## React Compiler
+Live demo:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+https://hand-tracker-web.vercel.app
 
-## Expanding the ESLint configuration
+> Replace the URL above with the actual Vercel deployment URL.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* Real-time hand tracking through the webcam
+* 21-point hand landmark detection
+* Gesture recognition
+* Virtual cursor control
+* Browser scrolling
+* Click interactions
+* Drag interactions
+* Visual hand landmark overlay
+* Real-time interaction feedback
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Supported Gestures
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Gesture           | Action          |
+| ----------------- | --------------- |
+| ☝️ Point          | Cursor movement |
+| 🤏 Index Pinch    | Click           |
+| ✌️ Peace          | Scroll          |
+| 🤏 Index + Middle | Right click     |
+| 🖐️ Open Palm     | Drag            |
+| ✊ Fist            | No interaction  |
 
+## Tech Stack
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* MediaPipe Tasks Vision
+* `@hand-tracker/core`
+* Motion
+* Lucide React
+
+## How It Works
+
+The browser application uses a camera-to-interaction pipeline:
+
+```text
+Webcam
+  ↓
+MediaPipe Hand Landmarker
+  ↓
+Hand Landmarks
+  ↓
+@hand-tracker/core
+  ↓
+Gesture / Interaction
+  ↓
+Browser Control
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+`@hand-tracker/core` contains the platform-independent hand tracking logic, gesture detection, cursor calculations, and interaction processing.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The Web application is responsible for connecting that logic to the browser.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
 
+Clone the repository and install dependencies:
+
+```bash
+npm install
 ```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will be available through the local Vite development server.
+
+## Production Build
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+The production output is generated in:
+
+```text
+dist/
+```
+
+## Browser Permissions
+
+The application requires access to your webcam.
+
+When prompted by the browser, allow camera access.
+
+Camera processing happens in the browser using MediaPipe.
+
+## Project Structure
+
+```text
+web/
+├── src/
+│   ├── app/
+│   ├── features/
+│   └── ...
+├── public/
+├── package.json
+└── vite.config.ts
+```
+
+The application is intentionally kept separate from the core hand-tracking logic.
+
+```text
+@hand-tracker/core
+        ↓
+      Web
+        ↓
+   Browser APIs
+```
+
+## Related Packages
+
+### `@hand-tracker/core`
+
+Platform-independent hand tracking, gesture detection, cursor, and interaction logic.
+
+### `@hand-tracker/driver`
+
+Desktop mouse driver using RobotJS.
+
+```text
+                    Hand Tracker
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+            Web                   Desktop
+             │                       │
+             ↓                       ↓
+          Browser              Electron / Driver
+             │                       │
+             └───────────┬───────────┘
+                         ↓
+                  @hand-tracker/core
+```
+
+## Status
+
+This project is under active development.
+
+The web version is primarily used as the browser-based interface and demonstration environment for the Hand Tracker system.
+
+## License
+
+MIT
