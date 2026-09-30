@@ -1,6 +1,6 @@
 export const mediapipeConfig = {
   wasmPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm',
-  modelAssetPath: '/models/hand_landmarker.task',
+  modelAssetPath: './models/hand_landmarker.task',
 
   runningMode: 'VIDEO',
 

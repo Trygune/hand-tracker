@@ -3,9 +3,9 @@ import path from "node:path";
 
 let tray: Tray | null = null;
 
-export function createTray(window: BrowserWindow): Tray {
+export const createTray = (window: BrowserWindow): Tray => {
   const iconPath = app.isPackaged
-    ? path.join(process.resourcesPath, "assets/icon.ico")
+    ? path.join(app.getAppPath(), "assets/icon.ico")
     : path.join(__dirname, "../../assets/icon.ico");
 
   tray = new Tray(iconPath);
@@ -36,4 +36,4 @@ export function createTray(window: BrowserWindow): Tray {
   });
 
   return tray;
-}
+};

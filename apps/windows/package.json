@@ -1,8 +1,8 @@
 {
-  "name": "windows",
-  "version": "1.0.0",
+  "name": "hand-tracker-windows",
+  "version": "0.1.0",
   "private": true,
-  "description": "hand tracker windows version",
+  "description": "Electron desktop application for Hand Tracker",
   "main": "dist/main/main.js",
   "scripts": {
     "start": "npm run build && electron .",
@@ -10,12 +10,13 @@
   },
   "author": "TryGune",
   "devDependencies": {
+    "@electron-forge/cli": "^8.0.1",
+    "@electron-forge/maker-zip": "^8.0.1",
     "electron": "^44.4.5",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "@hand-tracker/core": "^0.1.0",
-    "@hand-tracker/driver": "^0.1.0",
-    "robotjs": "^0.9.1"
+    "@hand-tracker/driver": "^0.1.0"
   }
 }
