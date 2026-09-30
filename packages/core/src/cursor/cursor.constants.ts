@@ -1,0 +1,1 @@
+export const CURSOR_SMOOTHING_ALPHA = 0.2

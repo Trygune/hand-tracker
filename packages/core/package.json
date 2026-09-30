@@ -1,0 +1,24 @@
+{
+  "name": "@hand-tracker/core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "prepare:cjs": "node scripts/prepare-cjs.mjs",
+    "build": "npm run build:esm && npm run build:cjs && npm run prepare:cjs"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

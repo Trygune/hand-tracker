@@ -1,0 +1,21 @@
+{
+  "name": "windows",
+  "version": "1.0.0",
+  "private": true,
+  "description": "hand tracker windows version",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "build": "tsc"
+  },
+  "author": "TryGune",
+  "devDependencies": {
+    "electron": "^44.4.5",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@hand-tracker/core": "file:../core",
+    "@hand-tracker/driver": "file:../driver",
+    "robotjs": "^0.9.1"
+  }
+}
