@@ -546,7 +546,7 @@ Hand Tracker currently supports the following gestures:
 | Point                | Move cursor    |
 | Index Pinch          | Left click     |
 | Peace                | Scroll         |
-| Index + Middle Pinch | Right click    |
+| Rock                 | Right click    |
 | Open Palm            | Drag           |
 | Fist                 | No interaction |
 
