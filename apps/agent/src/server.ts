@@ -3,7 +3,7 @@ import app from "./app.js";
 const start = async () => {
   try {
     await app.listen({
-      port: 5000,
+      port: Number(process.env.PORT ?? 5000),
       host: "127.0.0.1",
     });
   } catch (error) {
