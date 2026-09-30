@@ -1,9 +1,8 @@
 {
   "name": "@hand-tracker/core",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Platform-independent hand tracking, gesture detection, cursor, and interaction logic",
   "type": "module",
-  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -18,6 +17,9 @@
     "prepare:cjs": "node scripts/prepare-cjs.mjs",
     "build": "npm run build:esm && npm run build:cjs && npm run prepare:cjs"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "typescript": "^7.0.2"
   }

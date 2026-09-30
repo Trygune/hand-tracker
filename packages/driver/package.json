@@ -1,8 +1,7 @@
 {
   "name": "@hand-tracker/driver",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "version": "0.1.0",
+  "description": "Desktop mouse driver for Hand Tracker using RobotJS",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -18,8 +17,11 @@
     "build": "npm run build:esm && npm run build:cjs && npm run prepare:cjs"
   },
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@hand-tracker/core": "file:../core",
+    "@hand-tracker/core": "^0.1.0",
     "robotjs": "^0.9.1"
   },
   "devDependencies": {
