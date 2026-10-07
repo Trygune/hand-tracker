@@ -431,8 +431,6 @@ The client can then send commands such as:
 
 The Agent then maps these commands to the Driver.
 
----
-
 ## Run the Agent
 
 ```bash
