@@ -1,28 +1,30 @@
 # Hand Tracker
 
-A cross-platform hand tracking and gesture control system that turns hand movements into cursor and mouse interactions.
+**A cross-platform hand tracking and gesture control system built with TypeScript, MediaPipe, Electron, and RobotJS.**
 
-Hand Tracker is designed as a modular system rather than a single application. The core tracking and interaction logic is separated from platform-specific execution, allowing the same logic to power a browser application, a local WebSocket agent, and a native Windows desktop application.
+## Live Demos & Downloads
 
-## Features
+* **[Web Demo](https://hand-tracker-web.vercel.app)** — Track hand movements and interact with browser elements.
+* **[Windows App](https://drive.google.com/file/d/1DjLbuvHPjYk-UJqWjk0ZYI6eI79pPdfh/view?usp=sharing)** — Download and run the native Electron desktop application.
+* **[@hand-tracker/core](https://www.npmjs.com/package/@hand-tracker/core)** — Reusable, platform-independent gesture detection, cursor, and interaction logic.
+* **[@hand-tracker/driver](https://www.npmjs.com/package/@hand-tracker/driver)** — Native desktop mouse control powered by RobotJS.
 
-* Real-time hand tracking using MediaPipe
-* 21-point hand landmark detection
-* Gesture detection and stabilization
-* Virtual cursor control
-* Mouse movement
-* Left and right click
-* Scrolling
-* Drag and drop interactions
-* Browser-based control
+## Overview
+
+Hand Tracker transforms real-time hand movements into cursor movement and mouse interactions using MediaPipe's 21-point hand landmark detection.
+
+The project follows a modular architecture that separates gesture recognition and interaction logic from platform-specific execution. A shared Core powers the browser application, while a local WebSocket Agent and an Electron desktop application enable native operating-system mouse control through a reusable Driver package.
+
+### Key Features
+
+* Real-time hand tracking and gesture detection
+* Gesture stabilization for more reliable interactions
+* Virtual cursor movement and smoothing
+* Left click, right click, scrolling, and drag interactions
+* Browser-based control with visual hand tracking
 * Native Windows mouse control
-* Local WebSocket control through a desktop agent
-* Electron desktop application
-* Shared platform-independent Core
-* Shared desktop Driver based on RobotJS
-* ESM and CommonJS package builds
-
----
+* Local WebSocket communication between the browser and desktop Agent
+* Shared, reusable npm packages with ESM and CommonJS builds
 
 ## Architecture
 
@@ -74,8 +76,6 @@ The important architectural principle is:
 
 For example, Core can determine that the user performed a click, but Core does not directly call RobotJS or browser APIs.
 
----
-
 # Project Structure
 
 ```text
@@ -100,8 +100,6 @@ hand-tracker/
 │
 └── README.md
 ```
-
----
 
 # Packages
 
@@ -158,8 +156,6 @@ const result = interaction.update(gesture, position);
 
 The result can then be passed to a platform-specific executor.
 
----
-
 ## `@hand-tracker/driver`
 
 The Driver package provides the desktop implementation of mouse control.
@@ -212,8 +208,6 @@ Operating System
 ```
 
 This separation allows the same Driver to be used by both the Agent and Electron application.
-
----
 
 # Applications
 
@@ -270,8 +264,6 @@ The production build is generated in:
 apps/web/dist/
 ```
 
----
-
 # Agent
 
 ## What is the Agent?
@@ -320,8 +312,6 @@ Interaction
 
 The Agent is only the bridge between the browser and the operating system.
 
----
-
 ## Why use an Agent?
 
 Without the Agent:
@@ -352,8 +342,6 @@ Operating System
 
 This makes system-level mouse control possible while keeping the Web application independent from native desktop APIs.
 
----
-
 ## Agent responsibilities
 
 The Agent is responsible for:
@@ -377,8 +365,6 @@ The WebSocket endpoint is:
 ```text
 ws://127.0.0.1:5000/ws
 ```
-
----
 
 ## Agent connection
 
@@ -479,8 +465,6 @@ and the WebSocket endpoint is:
 ws://127.0.0.1:5000/ws
 ```
 
----
-
 # Windows Application
 
 The Windows application is the native desktop version of Hand Tracker.
@@ -515,8 +499,6 @@ Unlike the Agent architecture, the Windows application does not need WebSocket c
 
 The renderer communicates with the Electron main process through IPC.
 
----
-
 ## Why doesn't Windows use the Agent?
 
 The Agent exists to bridge:
@@ -534,8 +516,6 @@ Renderer → IPC → Driver
 ```
 
 This removes an unnecessary network layer.
-
----
 
 # Supported Gestures
 
@@ -563,8 +543,6 @@ Interaction Engine
       ↓
 Executor / Driver
 ```
-
----
 
 # Cursor System
 
@@ -595,8 +573,6 @@ Screen coordinates
 RobotJS
 ```
 
----
-
 # Hand Tracking Pipeline
 
 The complete pipeline is:
@@ -626,8 +602,6 @@ Browser / OS
 ```
 
 The Core is intentionally placed in the middle of this pipeline so that platform-specific code remains outside the main interaction logic.
-
----
 
 # MediaPipe
 
@@ -673,8 +647,6 @@ public/models/hand_landmarker.task
 
 and is included in the production renderer build.
 
----
-
 # Gesture Stability
 
 Raw hand landmark data can fluctuate between frames.
@@ -694,8 +666,6 @@ Frame 3 → Point
 This prevents small landmark fluctuations from causing unwanted interaction changes.
 
 The current system uses a multi-frame stability mechanism before accepting gesture changes.
-
----
 
 # Platform Separation
 
@@ -733,8 +703,6 @@ The Agent can send it through the Driver.
 
 This makes the Core reusable.
 
----
-
 # Web vs Agent vs Windows
 
 | Component | Purpose                      | Native Mouse | WebSocket |
@@ -744,8 +712,6 @@ This makes the Core reusable.
 | Windows   | Native desktop application   |          Yes |        No |
 | Core      | Tracking & interaction logic |           No |        No |
 | Driver    | OS mouse execution           |          Yes |        No |
-
----
 
 # Development
 
@@ -775,8 +741,6 @@ npm install
 npm start
 ```
 
----
-
 # Windows Packaging
 
 The Windows application is packaged using Electron Forge.
@@ -802,8 +766,6 @@ apps/windows/out/
 The current Windows distribution is generated as a ZIP containing the complete Electron application.
 
 The `.exe` should not be distributed by itself because Electron requires its accompanying resources, DLLs, Chromium files, and application resources.
-
----
 
 # Build Flow
 
@@ -840,8 +802,6 @@ models/
 
 The `base` configuration is relative so the same production UI can be loaded by Electron using `file://`.
 
----
-
 # Security Model
 
 The Windows Electron application uses:
@@ -873,8 +833,6 @@ The Agent binds to:
 ```
 
 rather than exposing its WebSocket server to the local network by default.
-
----
 
 # Technology Stack
 
@@ -917,8 +875,6 @@ rather than exposing its WebSocket server to the local network by default.
 * RobotJS
 * TypeScript
 
----
-
 # Repository Philosophy
 
 The project intentionally avoids putting platform-specific functionality into the Core.
@@ -950,8 +906,6 @@ Potential future integrations could include:
 * SDK integrations
 * Additional gesture detectors
 
----
-
 # Package Ecosystem
 
 The two reusable packages are:
@@ -960,8 +914,6 @@ The two reusable packages are:
 * `@hand-tracker/driver` — native desktop mouse execution
 
 The applications consume these packages rather than duplicating their functionality.
-
----
 
 # License
 
